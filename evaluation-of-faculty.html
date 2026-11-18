@@ -240,27 +240,28 @@
         }
 
         .table-wrapper {
-            overflow-x: auto;
+            width: 100%;
+            overflow-x: hidden;
         }
 
         .eval-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 11.5px;
-            min-width: 850px;
+            table-layout: auto;
         }
 
         .eval-table th {
             background-color: #f8fafc;
             color: #1e293b;
             text-align: left;
-            padding: 10px 14px;
+            padding: 10px 10px;
             border-bottom: 1px solid #cbd5e1;
             font-weight: bold;
         }
 
         .eval-table td {
-            padding: 12px 14px;
+            padding: 12px 10px;
             border-bottom: 1px solid #e2e8f0;
             color: #1e293b;
             vertical-align: middle;
@@ -276,15 +277,16 @@
             background: #f1f5f9;
             color: #166534;
             border: 1px solid #bbf7d0;
-            padding: 5px 10px;
+            padding: 5px 8px;
             border-radius: 4px;
-            font-size: 10.5px;
+            font-size: 9.5px;
             font-weight: bold;
             cursor: pointer;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 4px;
+            white-space: nowrap;
         }
 
         .eval-btn:hover {
@@ -353,7 +355,7 @@
             margin-top: auto;
         }
 
-        /* --- MOBILE RESPONSIVE MEDIA QUERY & OVERLAY --- */
+        /* --- MOBILE RESPONSIVE FIT-TO-WINDOW --- */
         @media (max-width: 900px) {
             .mobile-menu-toggle {
                 display: flex;
@@ -381,7 +383,7 @@
                 padding: 4px 10px;
             }
             .main-wrapper {
-                padding: 12px;
+                padding: 10px;
             }
             body {
                 height: auto !important;
@@ -390,6 +392,12 @@
             .page-body {
                 height: auto !important;
                 overflow: visible !important;
+            }
+            .eval-table {
+                font-size: 9.5px;
+            }
+            .eval-table th, .eval-table td {
+                padding: 8px 6px;
             }
         }
     </style>
@@ -478,7 +486,7 @@
                                 <td class="text-center">3</td>
                                 <td>[INSTRUCTOR NAME]</td>
                                 <td>LEC</td>
-                                <td class="text-center"><a href="#" class="eval-btn">✔ DONE EVALUATION</a></td>
+                                <td class="text-center"><a href="#" class="eval-btn">✔ DONE</a></td>
                             </tr>
                             <tr>
                                 <td>9815</td>
@@ -487,7 +495,7 @@
                                 <td class="text-center">3</td>
                                 <td>[INSTRUCTOR NAME]</td>
                                 <td>LEC</td>
-                                <td class="text-center"><a href="#" class="eval-btn">✔ DONE EVALUATION</a></td>
+                                <td class="text-center"><a href="#" class="eval-btn">✔ DONE</a></td>
                             </tr>
                             <tr>
                                 <td>9820</td>
@@ -496,7 +504,7 @@
                                 <td class="text-center">2</td>
                                 <td>[INSTRUCTOR NAME]</td>
                                 <td>LEC</td>
-                                <td class="text-center"><a href="#" class="eval-btn">✔ DONE EVALUATION</a></td>
+                                <td class="text-center"><a href="#" class="eval-btn">✔ DONE</a></td>
                             </tr>
                             <tr>
                                 <td>9821</td>
@@ -505,7 +513,7 @@
                                 <td class="text-center">1</td>
                                 <td>[INSTRUCTOR NAME]</td>
                                 <td>LAB</td>
-                                <td class="text-center"><a href="#" class="eval-btn">✔ DONE EVALUATION</a></td>
+                                <td class="text-center"><a href="#" class="eval-btn">✔ DONE</a></td>
                             </tr>
                             <tr>
                                 <td>9845</td>
@@ -514,7 +522,7 @@
                                 <td class="text-center">3</td>
                                 <td>[INSTRUCTOR NAME]</td>
                                 <td>LEC</td>
-                                <td class="text-center"><a href="#" class="eval-btn">✔ DONE EVALUATION</a></td>
+                                <td class="text-center"><a href="#" class="eval-btn">✔ DONE</a></td>
                             </tr>
                         </tbody>
                     </table>

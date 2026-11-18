@@ -217,27 +217,28 @@
         }
 
         .table-wrapper {
-            overflow-x: auto;
+            width: 100%;
+            overflow-x: hidden;
         }
 
         .tor-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 11.5px;
-            min-width: 800px;
+            table-layout: auto;
         }
 
         .tor-table th {
             background-color: #f8fafc;
             color: #1e293b;
             text-align: left;
-            padding: 10px 14px;
+            padding: 10px 10px;
             border-bottom: 1px solid #cbd5e1;
             font-weight: bold;
         }
 
         .tor-table td {
-            padding: 10px 14px;
+            padding: 10px 10px;
             border-bottom: 1px solid #e2e8f0;
             color: #1e293b;
             vertical-align: middle;
@@ -247,8 +248,8 @@
             background-color: #f1f5f9;
             font-weight: bold;
             color: var(--navy-primary);
-            font-size: 12px;
-            padding: 8px 14px;
+            font-size: 11.5px;
+            padding: 8px 10px;
             border-top: 1px solid #cbd5e1;
             border-bottom: 1px solid #cbd5e1;
         }
@@ -262,11 +263,12 @@
         .in-progress-badge {
             color: #64748b;
             font-style: italic;
-            font-size: 10.5px;
+            font-size: 9px;
             background: #f1f5f9;
-            padding: 3px 8px;
+            padding: 3px 6px;
             border-radius: 4px;
             display: inline-block;
+            white-space: nowrap;
         }
 
         footer {
@@ -280,7 +282,7 @@
             margin-top: auto;
         }
 
-        /* --- MOBILE RESPONSIVE MEDIA QUERY & OVERLAY --- */
+        /* --- MOBILE RESPONSIVE FIT-TO-WINDOW --- */
         @media (max-width: 900px) {
             .mobile-menu-toggle {
                 display: flex;
@@ -308,7 +310,7 @@
                 padding: 4px 10px;
             }
             .main-wrapper {
-                padding: 12px;
+                padding: 10px;
             }
             body {
                 height: auto !important;
@@ -317,6 +319,12 @@
             .page-body {
                 height: auto !important;
                 overflow: visible !important;
+            }
+            .tor-table {
+                font-size: 9.5px;
+            }
+            .tor-table th, .tor-table td {
+                padding: 8px 6px;
             }
         }
     </style>
