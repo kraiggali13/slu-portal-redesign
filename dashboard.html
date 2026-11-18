@@ -241,7 +241,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            overflow-y: auto;
+            overflow: hidden;
         }
 
         .events-container {
@@ -253,28 +253,28 @@
 
         .semester-graphic-wrapper {
             text-align: right;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .semester-graphic {
-            height: 48px;
+            height: 40px;
             object-fit: contain;
         }
 
         .event-item {
-            margin-bottom: 6px;
+            margin-bottom: 2px;
         }
 
         .event-title {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
             color: #111827;
-            line-height: 1.3;
-            margin-bottom: 3px;
+            line-height: 1.2;
+            margin-bottom: 2px;
         }
 
         .event-link {
-            font-size: 12px;
+            font-size: 11px;
             font-style: italic;
             color: #dc2626;
             text-decoration: none;
@@ -287,7 +287,7 @@
 
         .event-divider {
             border-bottom: 1px dashed #cbd5e1;
-            margin: 6px 0;
+            margin: 4px 0;
         }
 
         .status-container {
@@ -298,60 +298,60 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             width: 100%;
         }
 
         .status-label {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bold;
             color: #000000;
         }
 
         .enrolled-badge-img {
-            height: 32px;
+            height: 28px;
             width: auto;
-            max-width: 170px;
+            max-width: 150px;
             object-fit: contain;
             flex-shrink: 0;
         }
 
         .status-desc {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
             color: #1d4ed8;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             letter-spacing: 0.2px;
         }
 
         .divider {
             border-bottom: 1px dashed #cbd5e1;
-            margin: 8px 0 10px 0;
+            margin: 4px 0;
         }
 
         .deans-list-title {
-            font-size: 13.5px;
+            font-size: 12px;
             font-weight: bold;
             color: #1f2937;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .deans-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 11.5px;
+            font-size: 10.5px;
         }
 
         .deans-table th {
             text-align: left;
             border-bottom: 1px solid #9ca3af;
-            padding-bottom: 4px;
+            padding-bottom: 2px;
             color: #374151;
             font-weight: bold;
         }
 
         .deans-table td {
-            padding: 5px 0;
+            padding: 3px 0;
             border-bottom: 1px solid #f3f4f6;
             color: #1f2937;
         }
@@ -372,23 +372,23 @@
         .alert-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .alert-item {
-            margin-bottom: 3px;
-        }
-
-        .alert-title {
-            font-size: 12.5px;
-            font-weight: bold;
-            color: #111827;
-            line-height: 1.3;
             margin-bottom: 2px;
         }
 
-        .alert-link {
+        .alert-title {
             font-size: 11.5px;
+            font-weight: bold;
+            color: #111827;
+            line-height: 1.2;
+            margin-bottom: 1px;
+        }
+
+        .alert-link {
+            font-size: 11px;
             font-style: italic;
             color: #dc2626;
             text-decoration: none;
@@ -401,13 +401,13 @@
 
         .section-divider {
             border-bottom: 1px dashed #cbd5e1;
-            margin: 8px 0;
+            margin: 6px 0;
         }
 
         .quick-actions-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            gap: 8px;
             align-items: stretch;
             height: 100%;
         }
@@ -417,7 +417,7 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            padding: 14px 10px;
+            padding: 8px 6px;
             background: #f8fafc;
             border: 1px solid #e2e8f0;
             border-radius: 6px;
@@ -432,8 +432,8 @@
         }
 
         .action-icon {
-            font-size: 32px;
-            margin-bottom: 8px;
+            font-size: 24px;
+            margin-bottom: 4px;
             display: block;
         }
 
@@ -444,31 +444,31 @@
         }
 
         .action-title {
-            font-size: 11.5px;
+            font-size: 10.5px;
             font-weight: bold;
             color: #1e293b;
-            margin-bottom: 3px;
-            line-height: 1.25;
+            margin-bottom: 2px;
+            line-height: 1.15;
         }
 
         .action-desc {
-            font-size: 9.5px;
+            font-size: 8.5px;
             color: #64748b;
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
         footer {
             text-align: center;
-            padding: 10px;
-            font-size: 11px;
+            padding: 6px;
+            font-size: 10px;
             color: #64748b;
             background: #ffffff;
             border-top: 1px solid #cbd5e1;
             flex-shrink: 0;
         }
 
-        /* --- MOBILE RESPONSIVE MEDIA QUERY & REORDERING --- */
-        @media (max-width: 900px) {
+        /* --- FLUID MOBILE ADAPTATION (STRICTLY FIT-TO-WINDOW & NON-SCROLLABLE) --- */
+        @media (max-width: 900px), (max-height: 800px) {
             .mobile-menu-toggle {
                 display: flex;
                 align-items: center;
@@ -488,41 +488,121 @@
                 display: block;
             }
             header {
-                padding: 8px 14px;
+                padding: 6px 10px;
             }
             .user-profile-badge {
                 min-width: unset;
-                padding: 4px 10px;
+                max-width: 155px;
+                padding: 3px 6px;
+                gap: 6px;
             }
-            .main-wrapper {
-                padding: 12px;
-                overflow-y: auto !important;
+            .user-avatar-img {
+                width: 22px;
+                height: 22px;
             }
-            .content-container {
-                display: flex;
-                flex-direction: column;
-                height: auto !important;
-                overflow: visible !important;
-                grid-template-columns: 1fr !important;
-                grid-template-rows: auto !important;
-                gap: 14px;
+            .user-name {
+                font-size: 10.5px;
             }
-            /* Make Student Status (Card 2) appear first on mobile */
-            .dashboard-card:nth-child(1) { order: 2; } /* Events, News & Announcements */
-            .dashboard-card:nth-child(2) { order: 1; } /* Student Status */
-            .dashboard-card:nth-child(3) { order: 3; } /* Notifications & Alerts */
-            .dashboard-card:nth-child(4) { order: 4; } /* Quick Actions */
-
+            .logout-link {
+                font-size: 9px;
+            }
             body {
-                height: auto !important;
-                overflow: auto !important;
+                height: 100vh !important;
+                overflow: hidden !important;
             }
             .page-body {
-                height: auto !important;
-                overflow: visible !important;
+                height: calc(100vh - 48px) !important;
+                overflow: hidden !important;
+            }
+            .main-wrapper {
+                padding: 3px !important;
+                overflow: hidden !important;
+                height: 100%;
+            }
+            .content-container {
+                display: flex !important;
+                flex-direction: column !important;
+                height: 100% !important;
+                overflow: hidden !important;
+                gap: 3px !important;
+                padding: 0 !important;
+                max-width: 100% !important;
+                grid-template-columns: 1fr !important;
+                grid-template-rows: none !important;
+            }
+            /* Make Student Status (Card 2) appear first on mobile */
+            .dashboard-card:nth-child(1) { order: 2; flex: 1; min-height: 0; } /* Events */
+            .dashboard-card:nth-child(2) { order: 1; flex: 1.3; min-height: 0; } /* Student Status */
+            .dashboard-card:nth-child(3) { order: 3; flex: 1; min-height: 0; } /* Notifications */
+            .dashboard-card:nth-child(4) { order: 4; flex: 1; min-height: 0; } /* Quick Actions */
+
+            .dashboard-card {
+                margin-bottom: 0 !important;
+            }
+            .card-header-bar {
+                padding: 4px 8px !important;
+                font-size: 10.5px !important;
+                border-bottom-width: 1px !important;
+            }
+            .card-body {
+                padding: 4px 8px !important;
+                overflow: hidden !important;
+            }
+            .semester-graphic {
+                height: 28px !important;
+            }
+            .event-title {
+                font-size: 10px !important;
+            }
+            .event-link {
+                font-size: 9.5px !important;
+            }
+            .status-label {
+                font-size: 12px !important;
+            }
+            .enrolled-badge-img {
+                height: 22px !important;
+            }
+            .status-desc {
+                font-size: 9.5px !important;
+                margin-bottom: 2px !important;
+            }
+            .deans-list-title {
+                font-size: 10.5px !important;
+                margin-bottom: 2px !important;
+            }
+            .deans-table {
+                font-size: 9px !important;
+            }
+            .deans-table td {
+                padding: 1px 0 !important;
+            }
+            .alert-title {
+                font-size: 10px !important;
+            }
+            .alert-link {
+                font-size: 9.5px !important;
             }
             .quick-actions-container {
-                grid-template-columns: 1fr !important;
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 3px !important;
+            }
+            .action-item {
+                padding: 2px !important;
+            }
+            .action-icon {
+                font-size: 14px !important;
+                margin-bottom: 1px !important;
+            }
+            .action-title {
+                font-size: 7.5px !important;
+            }
+            .action-desc {
+                font-size: 6px !important;
+            }
+            footer {
+                padding: 2px;
+                font-size: 8.5px;
             }
         }
     </style>
@@ -567,17 +647,17 @@
                         <div class="semester-graphic-wrapper"><img src="res/semester.png" class="semester-graphic" alt="1st Semester 2026-2027"></div>
                         <div class="event-item">
                             <div class="event-title">LIST OF ELECTRONIC RESOURCES for AY 2026-2027</div>
-                            <a href="#" class="event-link">- view link</a>
+                            <a href="https://drive.google.com/file/d/19ISvodVumM7g5EOGadI2VHzbFu2fVC_r/view" class="event-link">- view link</a>
                         </div>
                         <div class="event-divider"></div>
                         <div class="event-item">
                             <div class="event-title">Schedule of Examinations, First Semester AY 2026-2027</div>
-                            <a href="#" class="event-link">- view link</a>
+                            <a href="https://drive.google.com/file/d/1sIjGRLqy-GCbzcwTyYT8uaoxh5OS5ufu/view" class="event-link">- view link</a>
                         </div>
                         <div class="event-divider"></div>
                         <div class="event-item">
                             <div class="event-title">SLU Academic Calendar (AY 2026-2027)</div>
-                            <a href="#" class="event-link">- view link</a>
+                            <a href="https://www.slu.edu.ph/academic-calendar/" class="event-link">- view link</a>
                         </div>
                     </div>
                 </div>
@@ -631,7 +711,7 @@
                         <div class="alert-group">
                             <div class="alert-item">
                                 <div class="alert-title">Advisory: Faculty Evaluation for Midterms is now ongoing and required</div>
-                                <a href="#" class="alert-link">- view evaluation</a>
+                                <a href="evaluation-of-faculty.html" class="alert-link">- view evaluation</a>
                             </div>
                             <div class="alert-item">
                                 <div class="alert-title">Advisory: Clearance application for graduating students opens next month</div>
