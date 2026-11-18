@@ -176,42 +176,7 @@
             min-width: 0;
         }
 
-        /* --- METRICS / SUMMARY STRIP --- */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
-            margin-bottom: 20px;
-            flex-shrink: 0;
-        }
-
-        .metric-card {
-            background: #ffffff;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            padding: 14px 18px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .metric-title {
-            font-size: 11px;
-            font-weight: bold;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .metric-value {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--navy-primary);
-            margin-top: 4px;
-        }
-
-        /* --- PAYMENT CHANNELS SIDE-CARD GRID --- */
+        /* --- TOP SECTION GRID --- */
         .top-section-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -220,87 +185,20 @@
             flex-shrink: 0;
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 1100px) {
             .top-section-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        .status-alert-box {
+        .summary-dashboard-card {
             background: #ffffff;
             border: 1px solid #cbd5e1;
             border-radius: 6px;
-            padding: 16px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.08);
             display: flex;
             flex-direction: column;
-            justify-content: center;
-        }
-
-        .alert-text-main {
-            font-size: 12px;
-            font-weight: bold;
-            color: #b91c1c;
-            margin-bottom: 6px;
-            line-height: 1.4;
-        }
-
-        .alert-text-sub {
-            font-size: 11px;
-            color: #475569;
-            line-height: 1.3;
-        }
-
-        .payment-channels-card {
-            background: #ffffff;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            padding: 14px 16px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .channels-title {
-            font-size: 11px;
-            font-weight: bold;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
-        }
-
-        .channel-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 12px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 12px;
-            border: 1px solid rgba(0,0,0,0.1);
-            transition: opacity 0.2s;
-        }
-
-        .channel-btn:hover {
-            opacity: 0.9;
-        }
-
-        .btn-lBP { background-color: #990000; color: #ffffff; }
-        .btn-bdo { background-color: #003366; color: #ffffff; }
-        .btn-bukas { background-color: #0072bc; color: #ffffff; }
-
-        /* --- ACCOUNTS CARD TABLES --- */
-        .account-card {
-            background: #ffffff;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
             overflow: hidden;
-            flex-shrink: 0;
         }
 
         .card-header-bar {
@@ -316,31 +214,172 @@
             border-bottom: 2px solid var(--gold-accent);
         }
 
+        .summary-card-body {
+            padding: 18px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            flex: 1;
+            justify-content: space-between;
+        }
+
+        .student-mini-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            padding: 6px 12px;
+            border-radius: 4px;
+            width: fit-content;
+        }
+
+        .student-mini-avatar {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        .student-mini-text {
+            font-size: 11.5px;
+            color: #1e293b;
+            font-weight: bold;
+        }
+
+        .balance-display-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .balance-label {
+            font-size: 12px;
+            font-weight: bold;
+            color: #475569;
+        }
+
+        .balance-amount-primary {
+            font-size: 26px;
+            font-weight: bold;
+            color: #b91c1c;
+            letter-spacing: -0.5px;
+        }
+
+        .balance-amount-secondary {
+            font-size: 20px;
+            font-weight: bold;
+            color: #0e284f;
+        }
+
+        .balance-divider {
+            border-bottom: 1px dashed #cbd5e1;
+            margin: 4px 0;
+        }
+
+        .status-alert-box {
+            background-color: #fef2f2;
+            border-left: 4px solid #dc2626;
+            padding: 10px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            color: #991b1b;
+            line-height: 1.4;
+        }
+
+        .status-alert-box strong {
+            color: #7f1d1d;
+        }
+
+        /* --- PAYMENT CHANNELS CARD --- */
+        .payment-channels-card {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .payment-channels-body {
+            padding: 14px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .channels-subtitle {
+            font-size: 11.5px;
+            color: #334155;
+            font-weight: bold;
+            line-height: 1.3;
+            margin-bottom: 2px;
+        }
+
+        .gateway-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            border: 1px solid rgba(0,0,0,0.15);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            transition: transform 0.1s, box-shadow 0.1s;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .gateway-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+        }
+
+        .btn-unionbank { background: linear-gradient(to bottom, #ff6600, #e65c00); color: #ffffff; }
+        .btn-dragonpay { background: #ffffff; color: #1e293b; border: 1px solid #cbd5e1; }
+        .btn-bpi { background: linear-gradient(to bottom, #b91c1c, #991b1b); color: #ffffff; }
+        .btn-bdo { background: linear-gradient(to bottom, #003366, #002244); color: #ffffff; }
+        .btn-bukas { background: #ffffff; color: #0072bc; border: 1px solid #cbd5e1; }
+
+        /* --- MODERNIZED TABLES WITH FIXED LAYOUT --- */
+        .account-card {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
         .table-wrapper {
             overflow-x: auto;
         }
 
         .accounts-table {
             width: 100%;
+            table-layout: fixed; /* Enforces strict even spacing across columns */
             border-collapse: collapse;
             font-size: 11.5px;
-            min-width: 650px;
         }
 
         .accounts-table th {
             background-color: #f8fafc;
             color: #1e293b;
             text-align: left;
-            padding: 9px 12px;
+            padding: 12px 16px;
             border-bottom: 1px solid #cbd5e1;
             font-weight: bold;
+            letter-spacing: 0.3px;
+            word-wrap: break-word;
         }
 
         .accounts-table td {
-            padding: 9px 12px;
+            padding: 14px 16px;
             border-bottom: 1px solid #e2e8f0;
             color: #1e293b;
             vertical-align: middle;
+            word-wrap: break-word;
         }
 
         .accounts-table tr:hover {
@@ -348,11 +387,42 @@
         }
 
         .text-right {
-            text-align: right;
+            text-align: right !important;
         }
 
-        .text-center {
-            text-align: center;
+        /* UX Badges & Formatting Inside Tables */
+        .type-badge {
+            display: inline-block;
+            font-size: 9.5px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-bottom: 3px;
+        }
+        .badge-charge { background: #e2e8f0; color: #334155; }
+        .badge-payment { background: #dcfce7; color: #166534; }
+
+        .item-title {
+            font-weight: bold;
+            color: #0f172a;
+            font-size: 12px;
+        }
+
+        .item-subtitle {
+            font-size: 10.5px;
+            color: #64748b;
+            font-family: monospace;
+            margin-top: 2px;
+        }
+
+        .amount-charge {
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        .amount-credit {
+            font-weight: bold;
+            color: #16a34a;
         }
 
         footer {
@@ -397,7 +467,7 @@
                 <a href="dashboard.html" class="nav-item">🏠 Home</a>
                 <a href="schedule.html" class="nav-item">📅 Schedule</a>
                 <a href="attendance.html" class="nav-item">📌 Attendance</a>
-                <a href="statement-of-accounts.html" class="nav-item active">💳 Statement of Accounts</a>
+                <a href="statement_of_accounts.html" class="nav-item active">💳 Statement of Accounts</a>
                 <a href="grades.html" class="nav-item">📊 Grades</a>
                 <a href="#" class="nav-item">📝 Evaluation of Faculty</a>
                 <a href="#" class="nav-item">📋 Transcript of Records</a>
@@ -412,92 +482,174 @@
         <!-- MAIN CONTENT WRAPPER -->
         <div class="main-wrapper">
             
-            <!-- Summary Metric Cards + Payment Channels Top Section -->
+            <!-- Top Section -->
             <div class="top-section-grid">
-                <div class="metrics-grid" style="margin-bottom: 0;">
-                    <div class="metric-card">
-                        <span class="metric-title">Current Balance</span>
-                        <span class="metric-value" style="color: #b91c1c;">₱ 11,789.00</span>
+                
+                <!-- Left Summary Card -->
+                <div class="summary-dashboard-card">
+                    <div class="card-header-bar">
+                        <span>💳</span> Statement of Accounts Summary
                     </div>
-                    <div class="status-alert-box">
-                        <div class="alert-text-main">MID-TERM STATUS: NOT PAID. Please pay before mid-term exams. Ignore if you're SLU Dependent or Full TOP Scholar.</div>
-                        <div class="alert-text-sub">For verification on unposted payments after "as of" date, please email sass@slu.edu.ph</div>
+                    <div class="summary-card-body">
+                        
+                        <div class="student-mini-badge">
+                            <img src="res/user icon.png" class="student-mini-avatar" alt="User">
+                            <span class="student-mini-text">2244749 | BSIT 4 &nbsp;&bull;&nbsp; Student Name</span>
+                        </div>
+
+                        <div class="balance-display-group">
+                            <span class="balance-label">Your amount due for MID-TERM is:</span>
+                            <div class="balance-amount-primary">₱ 5,900.00</div>
+                        </div>
+
+                        <div class="balance-divider"></div>
+
+                        <div class="balance-display-group">
+                            <span class="balance-label">Your remaining balance as of November 13, 2026 is:</span>
+                            <div class="balance-amount-secondary">₱ 11,789.00</div>
+                        </div>
+
+                        <div class="status-alert-box">
+                            <strong>MID-TERM STATUS: NOT PAID.</strong> Please pay before mid-term exams. Ignore if you're SLU Dependent or Full TOP Scholar.<br>
+                            <span style="color: #64748b; font-size: 10px; margin-top: 2px; display: inline-block;">For verification on unposted payments after "as of" date, please email sass@slu.edu.ph</span>
+                        </div>
+
                     </div>
                 </div>
 
-                <!-- Payment Partner Quick Links -->
+                <!-- Right Payment Channels Card -->
                 <div class="payment-channels-card">
-                    <span class="channels-title">Online Payment Partners</span>
-                    <a href="https://www.lbp.ph" target="_blank" class="channel-btn btn-lBP">Land Bank of the Philippines (LBP)</a>
-                    <a href="https://www.bdo.com.ph" target="_blank" class="channel-btn btn-bdo">BDO Online Banking</a>
-                    <a href="https://bukas.ph" target="_blank" class="channel-btn btn-bukas">Bukas Tuition Installment Plans</a>
+                    <div class="card-header-bar">
+                        <span>🛒</span> Online Payment Channels
+                    </div>
+                    <div class="payment-channels-body">
+                        <div class="channels-subtitle">Tuition fees can be paid via the available online payment channels:</div>
+                        
+                        <a href="https://www.unionbankph.com" target="_blank" class="gateway-btn btn-unionbank">
+                            <span>🟠 UnionBank UPay Online</span>
+                        </a>
+
+                        <a href="https://www.dragonpay.ph" target="_blank" class="gateway-btn btn-dragonpay">
+                            <span style="color: #ea580c; font-weight: bold;">🔥 dragonpay</span> <span style="font-size: 10px; color: #475569; font-weight: normal;">Payment Gateway</span>
+                        </a>
+
+                        <a href="https://www.bpi.com.ph" target="_blank" class="gateway-btn btn-bpi">
+                            <span>🏛️ BPI Online</span>
+                        </a>
+
+                        <a href="https://www.bdo.com.ph" target="_blank" class="gateway-btn btn-bdo">
+                            <span>🏦 BDO Online</span>
+                        </a>
+
+                        <a href="https://bukas.ph" target="_blank" class="gateway-btn btn-bukas">
+                            <span>🌊 Bukas <span style="font-weight: normal; font-size: 10px; color: #0284c7;">Tuition Installment Plans</span></span>
+                        </a>
+                    </div>
                 </div>
+
             </div>
 
             <!-- Breakdown of Fees Card -->
             <div class="account-card">
                 <div class="card-header-bar">
-                    <span>💳</span> Breakdown of fees as of November 13, 2026
+                    <span>📋</span> Breakdown of Fees as of November 13, 2026
                 </div>
                 <div class="table-wrapper">
                     <table class="accounts-table">
+                        <colgroup>
+                            <col style="width: 20%;">
+                            <col style="width: 60%;">
+                            <col style="width: 20%;">
+                        </colgroup>
                         <thead>
                             <tr>
-                                <th style="width: 15%;">Date</th>
-                                <th style="width: 65%;">Description</th>
-                                <th style="width: 20%;" class="text-right">Amount</th>
+                                <th>Date</th>
+                                <th>Transaction Description</th>
+                                <th class="text-right">Amount (PHP)</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>-</td>
-                                <td><strong>BEGINNING BALANCE</strong></td>
-                                <td class="text-right">0.00</td>
+                                <td>
+                                    <span class="type-badge badge-charge">BALANCE</span>
+                                    <div class="item-title">Beginning Balance</div>
+                                </td>
+                                <td class="text-right amount-charge">₱ 0.00</td>
                             </tr>
                             <tr>
                                 <td>08/07/2026</td>
-                                <td>DSAM1260806-BLDAUNPFGSS (JV100040)</td>
-                                <td class="text-right">( 8,755.00)</td>
+                                <td>
+                                    <span class="type-badge badge-payment">CREDIT / ADJUSTMENT</span>
+                                    <div class="item-title">Payment / Discount Application</div>
+                                    <div class="item-subtitle">DSAM1260806-BLDAUNPFGSS (JV100040)</div>
+                                </td>
+                                <td class="text-right amount-credit">( 8,755.00)</td>
                             </tr>
                             <tr>
                                 <td>09/16/2026</td>
-                                <td>TUITION FEE @820.00/u</td>
-                                <td class="text-right">3,690.00</td>
+                                <td>
+                                    <span class="type-badge badge-charge">FEE</span>
+                                    <div class="item-title">Tuition Fee (@820.00 / unit)</div>
+                                </td>
+                                <td class="text-right amount-charge">3,690.00</td>
                             </tr>
                             <tr>
                                 <td>09/16/2026</td>
-                                <td>TUITION FEE @1167.00/u</td>
-                                <td class="text-right">7,002.00</td>
+                                <td>
+                                    <span class="type-badge badge-charge">FEE</span>
+                                    <div class="item-title">Tuition Fee (@1,167.00 / unit)</div>
+                                </td>
+                                <td class="text-right amount-charge">7,002.00</td>
                             </tr>
                             <tr>
                                 <td>09/16/2026</td>
-                                <td>TUITION FEE @1167.00/u</td>
-                                <td class="text-right">7,002.00</td>
+                                <td>
+                                    <span class="type-badge badge-charge">FEE</span>
+                                    <div class="item-title">Tuition Fee (@1,167.00 / unit)</div>
+                                </td>
+                                <td class="text-right amount-charge">7,002.00</td>
                             </tr>
                             <tr>
                                 <td>09/16/2026</td>
-                                <td>OTHER FEES</td>
-                                <td class="text-right">7,948.00</td>
+                                <td>
+                                    <span class="type-badge badge-charge">FEE</span>
+                                    <div class="item-title">Other Miscellaneous Fees</div>
+                                </td>
+                                <td class="text-right amount-charge">7,948.00</td>
                             </tr>
                             <tr>
                                 <td>09/26/2026</td>
-                                <td>LAB/INTERN/OTHER FEE(S)</td>
-                                <td class="text-right">7,100.00</td>
+                                <td>
+                                    <span class="type-badge badge-charge">FEE</span>
+                                    <div class="item-title">Lab / Internship / Other Fee(s)</div>
+                                </td>
+                                <td class="text-right amount-charge">7,100.00</td>
                             </tr>
                             <tr>
                                 <td>09/23/2026</td>
-                                <td>LINKAGES IT/CS (JV100518)</td>
-                                <td class="text-right">822.00</td>
+                                <td>
+                                    <span class="type-badge badge-charge">FEE</span>
+                                    <div class="item-title">Linkages IT/CS Fee</div>
+                                    <div class="item-subtitle">JV100518</div>
+                                </td>
+                                <td class="text-right amount-charge">822.00</td>
                             </tr>
                             <tr>
                                 <td>10/23/2026</td>
-                                <td>DSAM261014-BYD4X66GEH76 (JV101076)</td>
-                                <td class="text-right">(13,020.00)</td>
+                                <td>
+                                    <span class="type-badge badge-payment">CREDIT / PAYMENT</span>
+                                    <div class="item-title">Payment Applied</div>
+                                    <div class="item-subtitle">DSAM261014-BYD4X66GEH76 (JV101076)</div>
+                                </td>
+                                <td class="text-right amount-credit">(13,020.00)</td>
                             </tr>
-                            <tr style="background-color: #f8fafc; font-weight: bold;">
+                            <tr style="background-color: #f8fafc; font-weight: bold; border-top: 2px solid #cbd5e1;">
                                 <td>-</td>
-                                <td>ENDING BALANCE</td>
-                                <td class="text-right" style="color: #0e284f;">11,789.00</td>
+                                <td>
+                                    <div class="item-title" style="font-size: 13px; color: #0e284f;">ENDING BALANCE</div>
+                                </td>
+                                <td class="text-right" style="font-size: 14px; color: #b91c1c;">₱ 11,789.00</td>
                             </tr>
                         </tbody>
                     </table>
@@ -507,42 +659,60 @@
             <!-- Online Payment Transactions Card -->
             <div class="account-card">
                 <div class="card-header-bar">
-                    <span>📃</span> Online Payment Transactions
+                    <span>📃</span> Online Payment Transactions History
                 </div>
                 <div class="table-wrapper">
                     <table class="accounts-table">
+                        <colgroup>
+                            <col style="width: 22%;">
+                            <col style="width: 18%;">
+                            <col style="width: 40%;">
+                            <col style="width: 20%;">
+                        </colgroup>
                         <thead>
                             <tr>
-                                <th style="width: 22%;">Date</th>
-                                <th style="width: 15%;">Channel</th>
-                                <th style="width: 45%;">Reference</th>
-                                <th style="width: 18%;" class="text-right">Amount</th>
+                                <th>Date & Time</th>
+                                <th>Channel</th>
+                                <th>Reference & Validation Details</th>
+                                <th class="text-right">Amount Paid</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>01/10/2026 07:55 AM</td>
-                                <td>INSTAPAY</td>
-                                <td>INPY Payment Auto Validated at Branch MARIBANK with ref 260110990001518 #IXGYN4NBS/</td>
-                                <td class="text-right">₱ 20,471.00</td>
+                                <td>01/10/2026 <span style="color: #64748b; font-size: 10px; display: block; margin-top: 2px;">07:55 AM</span></td>
+                                <td><span style="background: #e0f2fe; color: #0369a1; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 10px; display: inline-block;">INSTAPAY</span></td>
+                                <td>
+                                    <div class="item-title">Auto Validated at Branch MARIBANK</div>
+                                    <div class="item-subtitle">Ref: 260110990001518 #IXGYN4NBS/</div>
+                                </td>
+                                <td class="text-right amount-credit">₱ 20,471.00</td>
                             </tr>
                             <tr>
-                                <td>06/02/2026 08:05 PM</td>
-                                <td>INSTAPAY</td>
-                                <td>INPY Payment Auto Validated at Branch MARIBANK with ref 2606029900019523 #BLWXBLTZTJMB</td>
-                                <td class="text-right">₱ 14,943.00</td>
+                                <td>06/02/2026 <span style="color: #64748b; font-size: 10px; display: block; margin-top: 2px;">08:05 PM</span></td>
+                                <td><span style="background: #e0f2fe; color: #0369a1; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 10px; display: inline-block;">INSTAPAY</span></td>
+                                <td>
+                                    <div class="item-title">Auto Validated at Branch MARIBANK</div>
+                                    <div class="item-subtitle">Ref: 2606029900019523 #BLWXBLTZTJMB</div>
+                                </td>
+                                <td class="text-right amount-credit">₱ 14,943.00</td>
                             </tr>
                             <tr>
-                                <td>06/09/2026 04:49 PM</td>
-                                <td>INSTAPAY</td>
-                                <td>INPY Payment Auto Validated at Branch MARIBANK with ref 2606099900012035 #BJQP3GUXAHN1</td>
-                                <td class="text-right">₱ 12,893.00</td>
+                                <td>06/09/2026 <span style="color: #64748b; font-size: 10px; display: block; margin-top: 2px;">04:49 PM</span></td>
+                                <td><span style="background: #e0f2fe; color: #0369a1; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 10px; display: inline-block;">INSTAPAY</span></td>
+                                <td>
+                                    <div class="item-title">Auto Validated at Branch MARIBANK</div>
+                                    <div class="item-subtitle">Ref: 2606099900012035 #BJQP3GUXAHN1</div>
+                                </td>
+                                <td class="text-right amount-credit">₱ 12,893.00</td>
                             </tr>
                             <tr>
-                                <td>07/27/2026 02:13 PM</td>
-                                <td>INSTAPAY</td>
-                                <td>INPY Payment Auto Validated at Branch MARIBANK with ref 260727990011073 #BZPKJUSD1RF5</td>
-                                <td class="text-right">₱ 7,002.00</td>
+                                <td>07/27/2026 <span style="color: #64748b; font-size: 10px; display: block; margin-top: 2px;">02:13 PM</span></td>
+                                <td><span style="background: #e0f2fe; color: #0369a1; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 10px; display: inline-block;">INSTAPAY</span></td>
+                                <td>
+                                    <div class="item-title">Auto Validated at Branch MARIBANK</div>
+                                    <div class="item-subtitle">Ref: 260727990011073 #BZPKJUSD1RF5</div>
+                                </td>
+                                <td class="text-right amount-credit">₱ 7,002.00</td>
                             </tr>
                         </tbody>
                     </table>
