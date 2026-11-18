@@ -31,7 +31,6 @@
             overflow: hidden;
         }
 
-        /* --- HEADER --- */
         header {
             background-color: var(--navy-primary);
             color: #ffffff;
@@ -55,6 +54,18 @@
         .header-logo-img {
             height: 44px;
             object-fit: contain;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            font-size: 20px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 12px;
         }
 
         .user-profile-badge {
@@ -103,14 +114,12 @@
             text-decoration: underline;
         }
 
-        /* --- PAGE BODY --- */
         .page-body {
             display: flex;
             flex: 1;
             overflow: hidden;
         }
 
-        /* --- SIDEBAR --- */
         aside {
             width: 260px;
             background-color: var(--navy-primary);
@@ -119,6 +128,7 @@
             flex-direction: column;
             border-right: 2px solid #071624;
             flex-shrink: 0;
+            transition: left 0.3s ease-in-out;
         }
 
         .term-selector-box {
@@ -166,7 +176,14 @@
             padding-left: 12px;
         }
 
-        /* --- MAIN WRAPPER --- */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+        }
+
         .main-wrapper {
             flex: 1;
             display: flex;
@@ -199,119 +216,72 @@
             border-bottom: 2px solid var(--gold-accent);
         }
 
-        .card-body-content {
+        .content-body {
             padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
-        }
-
-        .download-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 16px;
         }
 
-        .download-category-box {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            padding: 16px;
-        }
-
-        .category-title {
-            font-size: 12.5px;
+        .section-heading {
+            font-size: 13px;
             font-weight: bold;
             color: var(--navy-primary);
-            text-transform: uppercase;
             border-bottom: 2px solid #cbd5e1;
-            padding-bottom: 6px;
-            margin-bottom: 10px;
-            letter-spacing: 0.3px;
+            padding-bottom: 4px;
+            margin-top: 4px;
+            text-transform: uppercase;
         }
 
         .download-list {
-            list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         .download-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 11.5px;
-            color: #334155;
-            padding: 4px 0;
-            border-bottom: 1px dashed #e2e8f0;
-        }
-
-        .download-item:last-child {
-            border-bottom: none;
-        }
-
-        .download-link {
-            color: #dc2626;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 10.5px;
-            background: #fee2e2;
-            padding: 2px 6px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 10px 14px;
             border-radius: 4px;
-            transition: background 0.2s;
-            white-space: nowrap;
-        }
-
-        .download-link:hover {
-            background: #fecaca;
-            text-decoration: underline;
-        }
-
-        /* --- TEXT HYPERLINK STYLING FOR DIRECTORIES --- */
-        .office-link {
-            color: var(--light-blue);
             text-decoration: none;
-            font-weight: bold;
-            transition: color 0.2s;
+            color: #1e293b;
+            font-size: 11.5px;
+            transition: background 0.2s, border-color 0.2s;
         }
 
-        .office-link:hover {
-            color: var(--navy-primary);
-            text-decoration: underline;
+        .download-item:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
         }
 
-        /* --- ABOUT SECTION STYLING --- */
-        .about-section-title {
-            font-size: 13px;
+        .download-title {
             font-weight: bold;
-            color: var(--navy-primary);
-            margin-top: 10px;
-            margin-bottom: 6px;
-            text-transform: uppercase;
+            color: #0f172a;
+        }
+
+        .download-meta {
+            font-size: 10px;
+            color: #64748b;
+        }
+
+        .download-btn {
+            background: var(--navy-primary);
+            color: var(--gold-accent);
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 10.5px;
+            font-weight: bold;
+            text-decoration: none;
         }
 
         .about-text {
             font-size: 11.5px;
+            line-height: 1.6;
             color: #334155;
-            line-height: 1.5;
-            margin-bottom: 12px;
-        }
-
-        .features-list {
-            list-style-type: disc;
-            padding-left: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            font-size: 11.5px;
-            color: #334155;
-            margin-bottom: 14px;
-        }
-
-        .features-list li span {
-            font-weight: bold;
-            color: var(--navy-primary);
         }
 
         footer {
@@ -324,13 +294,61 @@
             flex-shrink: 0;
             margin-top: auto;
         }
+
+        /* --- MOBILE RESPONSIVE MEDIA QUERY --- */
+        @media (max-width: 900px) {
+            .mobile-menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            aside {
+                position: fixed;
+                top: 0;
+                left: -260px;
+                height: 100vh;
+                z-index: 100;
+            }
+            aside.mobile-open {
+                left: 0;
+            }
+            .sidebar-overlay.active {
+                display: block;
+            }
+            header {
+                padding: 8px 14px;
+            }
+            .user-profile-badge {
+                min-width: unset;
+                padding: 4px 10px;
+            }
+            .main-wrapper {
+                padding: 12px;
+            }
+            body {
+                height: auto !important;
+                overflow: auto !important;
+            }
+            .page-body {
+                height: auto !important;
+                overflow: visible !important;
+            }
+            .download-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="header-brand-container">
-            <img src="res/header pic.png" class="header-logo-img" alt="SLU Portal">
+        <div style="display: flex; align-items: center;">
+            <button class="mobile-menu-toggle" id="menuToggle" aria-label="Toggle Navigation">&#9776;</button>
+            <div class="header-brand-container">
+                <img src="res/header pic.png" class="header-logo-img" alt="SLU Portal">
+            </div>
         </div>
 
         <div class="user-profile-badge">
@@ -365,132 +383,50 @@
         </aside>
 
         <div class="main-wrapper">
-            
-            <!-- Downloadables Card -->
             <div class="portal-card">
                 <div class="card-header-bar">
-                    <span>📥</span> University Downloadables & Forms
+                    <span>ℹ️</span> Downloadables & About iSLU
                 </div>
-                <div class="card-body-content">
-                    <div class="download-grid">
-                        
-                        <!-- General Category -->
-                        <div class="download-category-box">
-                            <div class="category-title">General Policies & Handbooks</div>
-                            <ul class="download-list">
-                                <li class="download-item"><span>Student Handbook</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>Safety Orientation Manual</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>Ordinance 021-2018 - Harassment</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>GSuite for Education</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>The Mission and Identity Cluster</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>Official List of Student Organizations</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>University Libraries</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>OSA Student Services Orientation</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>KASAMA SSC Orientation</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>Feeling at Home in SLU</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>Health and Safety Protocols re COVID 19 Prevention</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>Policies and Guidelines on Student Behavior</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>SLU Policy on COVID-19 Prevention & Control</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>SLU Privacy Policy</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>SLU Quality Policy</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>SLU UNIVERSITY PRAYER</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>Special Guidelines for Recognition 2021 to 2022</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>Baguio City Anti Discrimination Ordinance</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>IRR of RA 11313 Safe Spaces Act</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>Safe Spaces Act 20190417 RA 11313 RRD</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>Emails of SLU Student Groups</span> <a href="#" class="download-link">[download]</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Counseling & Support Category -->
-                        <div class="download-category-box">
-                            <div class="category-title">Center for Counseling & Student Services</div>
-                            <ul class="download-list">
-                                <li class="download-item"><span>Handouts for Parents on Independent Living</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>Freshie Career Booklet</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>Referral Guide Poster</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>SULN Brochure</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>SULN Form</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>The Louisian Journal 2023</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>CCW Referral Form</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>Medical Clinic Continuity Plan</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>Online Schedule of Medical Clinic</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>SLU Residence Halls</span> <a href="#" class="download-link">[download]</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- School Helpdesks Category -->
-                        <div class="download-category-box">
-                            <div class="category-title">School Helpdesks & Offerings</div>
-                            <ul class="download-list">
-                                <li class="download-item"><span>SAMCIS Online Helpdesk</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>SAMCIS Program Offerings Overview</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>SAS HELPDESK</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>SEA Online Helpdesk</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>SEA Program Offerings Overview</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>SONAHBS Online Helpdesk</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>SNS Program Offerings Overview</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>SON Program Offering Overview</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>SOL Online Helpdesk</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>SOM Online Helpdesk</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>STELA Online Helpdesk</span> <a href="#" class="download-link">[download]</a></li>
-                                <li class="download-item"><span>STELA Program Offerings Overview</span> <a href="#" class="download-link">[download]</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Student Services Offices Directory (Text Hyperlinked) -->
-                        <div class="download-category-box">
-                            <div class="category-title">Student Services Orientation Offices</div>
-                            <ul class="download-list">
-                                <li class="download-item"><a href="#" class="office-link">Guidance Center</a></li>
-                                <li class="download-item"><a href="#" class="office-link">Office of Student Affairs</a></li>
-                                <li class="download-item"><a href="#" class="office-link">University Registrar's Office</a></li>
-                                <li class="download-item"><a href="#" class="office-link">University Libraries</a></li>
-                                <li class="download-item"><a href="#" class="office-link">Office of External Relations & Alumni</a></li>
-                                <li class="download-item"><a href="#" class="office-link">Office of VP for Mission and Identity</a></li>
-                                <li class="download-item"><a href="#" class="office-link">Campus Planning & Maintenance</a></li>
-                                <li class="download-item"><a href="#" class="office-link">Dental Clinic & Medical Clinic</a></li>
-                                <li class="download-item"><a href="#" class="office-link">Technology Management Department</a></li>
-                            </ul>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- About iSLU Portal Card -->
-            <div class="portal-card">
-                <div class="card-header-bar">
-                    <span>ℹ️</span> About iSLU Portal
-                </div>
-                <div class="card-body-content">
-                    <div>
-                        <div class="about-section-title">Overview</div>
-                        <p class="about-text">SLU Portal is for Saint Louis University students and parents, that serves as a personal assistant in carrying out university-related tasks.</p>
-                        <p class="about-text">Students can view their personal details, schedules, current grades, accountabilities, curriculum checklist and more. Parents can also view these modules of their children as long as they register.</p>
+                <div class="content-body">
+                    
+                    <div class="section-heading">Downloadable Student Forms & Documents</div>
+                    <div class="download-list">
+                        <a href="#" class="download-item">
+                            <div>
+                                <div class="download-title">Student Clearance Form (AY 2026-2027)</div>
+                                <div class="download-meta">PDF format &bull; 1.2 MB</div>
+                            </div>
+                            <span class="download-btn">Download</span>
+                        </a>
+                        <a href="#" class="download-item">
+                            <div>
+                                <div class="download-title">Application for Leave of Absence / Dropping</div>
+                                <div class="download-meta">PDF format &bull; 850 KB</div>
+                            </div>
+                            <span class="download-btn">Download</span>
+                        </a>
+                        <a href="#" class="download-item">
+                            <div>
+                                <div class="download-title">Student Handbook & Code of Conduct</div>
+                                <div class="download-meta">PDF format &bull; 4.5 MB</div>
+                            </div>
+                            <span class="download-btn">Download</span>
+                        </a>
+                        <a href="#" class="download-item">
+                            <div>
+                                <div class="download-title">Practicum / Internship Guidelines & Logbook Template</div>
+                                <div class="download-meta">DOCX format &bull; 2.1 MB</div>
+                            </div>
+                            <span class="download-btn">Download</span>
+                        </a>
                     </div>
 
-                    <div>
-                        <div class="about-section-title">Features Available</div>
-                        <ul class="features-list">
-                            <li><span>Personal Details:</span> where a student can view his/her personal information.</li>
-                            <li><span>Class Schedule:</span> where a student can view his/her enrolled subjects of the current term.</li>
-                            <li><span>Class Attendance:</span> displays the absences of the student of the current term.</li>
-                            <li><span>Current Grades:</span> shows the Prelim, Mid-term and Tentative final grades of a student.</li>
-                            <li><span>Transcript of Records:</span> shows the final grades in the previous term of a student.</li>
-                            <li><span>Statement of Accounts:</span> shows if a student still has account balance from the accounting office.</li>
-                            <li><span>Curriculum Checklist:</span> shows the student's checklist of a curriculum chosen.</li>
-                            <li><span>School Calendar:</span> where a student can view the school events and no classes within an academic year.</li>
-                        </ul>
+                    <div class="section-heading" style="margin-top: 10px;">About iSLU Portal</div>
+                    <div class="about-text">
+                        <strong>iSLU (Integrated Saint Louis University) Student Portal</strong> is the official web-based student information system designed to provide Louisian students with secure, real-time access to their academic records, enrollment status, class schedules, financial statements, and institutional announcements.<br><br>
+                        Maintained and supported by the Saint Louis University Information Technology and Computer Services (ITCS) department, the portal streamlines campus transactions, document requests, and faculty evaluations into a unified digital platform.
                     </div>
 
-                    <div>
-                        <div class="about-section-title">How to Register? or Forgot User ID Number and Password?</div>
-                        <ul class="features-list">
-                            <li><span>STUDENTS:</span> proceed to IT CENTER SOFTWARE DEVELOPMENT (MIS), 2nd floor, Burgos Administrative Center, Saint Louis University.</li>
-                            <li><span>PARENTS/GUARDIANS:</span> register at Registrar's office, Diego Silang building, Saint Louis University.</li>
-                        </ul>
-                    </div>
                 </div>
             </div>
 
@@ -499,5 +435,25 @@
             </footer>
         </div>
     </div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.querySelector('aside');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        if (menuToggle && sidebar) {
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('mobile-open');
+                if (overlay) overlay.classList.toggle('active');
+            });
+            if (overlay) {
+                overlay.addEventListener('click', () => {
+                    sidebar.classList.remove('mobile-open');
+                    overlay.classList.remove('active');
+                });
+            }
+        }
+    </script>
 </body>
 </html>
