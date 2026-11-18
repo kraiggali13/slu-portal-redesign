@@ -467,7 +467,7 @@
             flex-shrink: 0;
         }
 
-        /* --- MOBILE RESPONSIVE MEDIA QUERY & OVERLAY --- */
+        /* --- MOBILE RESPONSIVE MEDIA QUERY & REORDERING --- */
         @media (max-width: 900px) {
             .mobile-menu-toggle {
                 display: flex;
@@ -496,13 +496,23 @@
             }
             .main-wrapper {
                 padding: 12px;
+                overflow-y: auto !important;
             }
             .content-container {
-                grid-template-columns: 1fr !important;
-                grid-template-rows: auto !important;
+                display: flex;
+                flex-direction: column;
                 height: auto !important;
                 overflow: visible !important;
+                grid-template-columns: 1fr !important;
+                grid-template-rows: auto !important;
+                gap: 14px;
             }
+            /* Make Student Status (Card 2) appear first on mobile */
+            .dashboard-card:nth-child(1) { order: 2; } /* Events, News & Announcements */
+            .dashboard-card:nth-child(2) { order: 1; } /* Student Status */
+            .dashboard-card:nth-child(3) { order: 3; } /* Notifications & Alerts */
+            .dashboard-card:nth-child(4) { order: 4; } /* Quick Actions */
+
             body {
                 height: auto !important;
                 overflow: auto !important;
@@ -531,7 +541,6 @@
             </div>
         </div>
     </header>
-
     <div class="page-body">
         <aside>
             <div class="term-selector-box"><span class="term-text">FIRST SEMESTER, 2026-2027</span></div>
@@ -550,7 +559,6 @@
                 <a href="downloadables-about-islu.html" class="nav-item">ℹ️ Downloadables / About iSLU</a>
             </div>
         </aside>
-
         <div class="main-wrapper">
             <div class="content-container">
                 <div class="dashboard-card">
@@ -573,7 +581,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="dashboard-card">
                     <div class="card-header-bar"><span>📊</span> Student Status</div>
                     <div class="card-body status-container">
@@ -607,7 +614,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="dashboard-card">
                     <div class="card-header-bar"><span>🔔</span> Notifications & Alerts</div>
                     <div class="card-body notif-container">
@@ -634,7 +640,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="dashboard-card">
                     <div class="card-header-bar"><span>⚡</span> Quick Actions</div>
                     <div class="card-body quick-actions-container">
