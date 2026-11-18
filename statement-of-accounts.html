@@ -35,6 +35,17 @@
         }
         .header-brand-container { height: 36px; overflow: hidden; display: flex; align-items: center; }
         .header-logo-img { height: 44px; object-fit: contain; }
+        .mobile-menu-toggle {
+            display: none;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            font-size: 20px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 12px;
+        }
         .user-profile-badge {
             display: flex;
             align-items: center;
@@ -52,13 +63,29 @@
         .logout-link { font-size: 11px; color: #93c5fd; text-decoration: none; margin-top: 2px; }
         .logout-link:hover { color: #ffffff; text-decoration: underline; }
         .page-body { display: flex; flex: 1; overflow: hidden; }
-        aside { width: 260px; background-color: var(--navy-primary); color: #ffffff; display: flex; flex-direction: column; border-right: 2px solid #071624; flex-shrink: 0; }
+        aside { 
+            width: 260px; 
+            background-color: var(--navy-primary); 
+            color: #ffffff; 
+            display: flex; 
+            flex-direction: column; 
+            border-right: 2px solid #071624; 
+            flex-shrink: 0; 
+            transition: left 0.3s ease-in-out;
+        }
         .term-selector-box { background-color: #071624; margin: 16px 14px 14px 14px; padding: 10px 12px; border-radius: 4px; text-align: center; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); }
         .term-text { color: #ffffff; font-size: 11px; font-weight: bold; letter-spacing: 0.3px; }
         .sidebar-menu { flex: 1; overflow-y: auto; padding: 4px 0; }
         .nav-item { padding: 10px 16px; display: flex; align-items: center; gap: 10px; color: #cbd5e1; text-decoration: none; font-size: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.04); transition: background 0.2s, color 0.2s; }
         .nav-item:hover, .nav-item.active { background-color: rgba(255, 255, 255, 0.08); color: #ffffff; }
         .nav-item.active { border-left: 4px solid var(--gold-accent); padding-left: 12px; }
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+        }
         .main-wrapper { flex: 1; display: flex; flex-direction: column; overflow-y: auto; padding: 20px; min-width: 0; }
         .top-section-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 20px; flex-shrink: 0; }
         @media (max-width: 1100px) { .top-section-grid { grid-template-columns: 1fr; } }
@@ -100,11 +127,54 @@
         .amount-charge { font-weight: bold; color: #1e293b; }
         .amount-credit { font-weight: bold; color: #16a34a; }
         footer { text-align: center; padding: 14px; font-size: 11px; color: #64748b; background: #ffffff; border-top: 1px solid #cbd5e1; flex-shrink: 0; margin-top: auto; }
+
+        /* --- MOBILE RESPONSIVE MEDIA QUERY & OVERLAY --- */
+        @media (max-width: 900px) {
+            .mobile-menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            aside {
+                position: fixed;
+                top: 0;
+                left: -260px;
+                height: 100vh;
+                z-index: 100;
+            }
+            aside.mobile-open {
+                left: 0;
+            }
+            .sidebar-overlay.active {
+                display: block;
+            }
+            header {
+                padding: 8px 14px;
+            }
+            .user-profile-badge {
+                min-width: unset;
+                padding: 4px 10px;
+            }
+            .main-wrapper {
+                padding: 12px;
+            }
+            body {
+                height: auto !important;
+                overflow: auto !important;
+            }
+            .page-body {
+                height: auto !important;
+                overflow: visible !important;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
-        <div class="header-brand-container"><img src="res/header pic.png" class="header-logo-img" alt="SLU Portal"></div>
+        <div style="display: flex; align-items: center;">
+            <button class="mobile-menu-toggle" id="menuToggle" aria-label="Toggle Navigation">&#9776;</button>
+            <div class="header-brand-container"><img src="res/header pic.png" class="header-logo-img" alt="SLU Portal"></div>
+        </div>
         <div class="user-profile-badge">
             <img src="res/user icon.png" class="user-avatar-img" alt="User Icon">
             <div class="user-meta">
@@ -288,5 +358,25 @@
             <footer>Copyright © 2026 Saint Louis University Inc. All rights reserved.</footer>
         </div>
     </div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.querySelector('aside');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        if (menuToggle && sidebar) {
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('mobile-open');
+                if (overlay) overlay.classList.toggle('active');
+            });
+            if (overlay) {
+                overlay.addEventListener('click', () => {
+                    sidebar.classList.remove('mobile-open');
+                    overlay.classList.remove('active');
+                });
+            }
+        }
+    </script>
 </body>
 </html>

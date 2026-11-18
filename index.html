@@ -155,6 +155,36 @@
         .card-footer a:hover {
             text-decoration: underline;
         }
+
+        /* --- MOBILE RESPONSIVE MEDIA QUERY --- */
+        @media (max-width: 600px) {
+            body {
+                padding-top: 20px;
+                height: auto;
+                overflow: auto;
+            }
+            .portal-container {
+                padding: 15px;
+            }
+            .brand-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .crest-img {
+                height: 140px;
+            }
+            .logo-wrapper {
+                height: 110px;
+            }
+            .logo-img {
+                height: 120px;
+            }
+            .login-card {
+                width: 100%;
+                max-width: 360px;
+                padding: 18px 20px;
+            }
+        }
     </style>
 </head>
 <body>

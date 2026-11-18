@@ -57,6 +57,18 @@
             object-fit: contain;
         }
 
+        .mobile-menu-toggle {
+            display: none;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            font-size: 20px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 12px;
+        }
+
         .user-profile-badge {
             display: flex;
             align-items: center;
@@ -119,6 +131,7 @@
             flex-direction: column;
             border-right: 2px solid #071624;
             flex-shrink: 0;
+            transition: left 0.3s ease-in-out;
         }
 
         .term-selector-box {
@@ -164,6 +177,14 @@
         .nav-item.active {
             border-left: 4px solid var(--gold-accent);
             padding-left: 12px;
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
         }
 
         /* --- MAIN WRAPPER --- */
@@ -331,13 +352,56 @@
             flex-shrink: 0;
             margin-top: auto;
         }
+
+        /* --- MOBILE RESPONSIVE MEDIA QUERY & OVERLAY --- */
+        @media (max-width: 900px) {
+            .mobile-menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            aside {
+                position: fixed;
+                top: 0;
+                left: -260px;
+                height: 100vh;
+                z-index: 100;
+            }
+            aside.mobile-open {
+                left: 0;
+            }
+            .sidebar-overlay.active {
+                display: block;
+            }
+            header {
+                padding: 8px 14px;
+            }
+            .user-profile-badge {
+                min-width: unset;
+                padding: 4px 10px;
+            }
+            .main-wrapper {
+                padding: 12px;
+            }
+            body {
+                height: auto !important;
+                overflow: auto !important;
+            }
+            .page-body {
+                height: auto !important;
+                overflow: visible !important;
+            }
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="header-brand-container">
-            <img src="res/header pic.png" class="header-logo-img" alt="SLU Portal">
+        <div style="display: flex; align-items: center;">
+            <button class="mobile-menu-toggle" id="menuToggle" aria-label="Toggle Navigation">&#9776;</button>
+            <div class="header-brand-container">
+                <img src="res/header pic.png" class="header-logo-img" alt="SLU Portal">
+            </div>
         </div>
 
         <div class="user-profile-badge">
@@ -471,5 +535,25 @@
             </footer>
         </div>
     </div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.querySelector('aside');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        if (menuToggle && sidebar) {
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('mobile-open');
+                if (overlay) overlay.classList.toggle('active');
+            });
+            if (overlay) {
+                overlay.addEventListener('click', () => {
+                    sidebar.classList.remove('mobile-open');
+                    overlay.classList.remove('active');
+                });
+            }
+        }
+    </script>
 </body>
 </html>
