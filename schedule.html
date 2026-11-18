@@ -215,10 +215,16 @@
             gap: 8px;
         }
 
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
         .courses-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 11.5px;
+            white-space: nowrap;
         }
 
         .courses-table th {
@@ -250,6 +256,7 @@
         }
 
         .weekly-grid-wrapper {
+            width: 100%;
             overflow-x: auto;
         }
 
@@ -258,14 +265,14 @@
             border-collapse: collapse;
             font-size: 10.5px;
             table-layout: fixed;
-            min-width: 700px;
+            min-width: 650px;
         }
 
         .weekly-table th, .weekly-table td {
             border: 1px solid #cbd5e1;
-            padding: 5px;
+            padding: 4px;
             text-align: center;
-            height: 38px;
+            height: 36px;
         }
 
         .weekly-table th {
@@ -278,7 +285,7 @@
             background-color: #f8fafc;
             color: #475569;
             font-weight: bold;
-            width: 75px;
+            width: 65px;
         }
 
         .current-day-highlight {
@@ -289,11 +296,12 @@
             background-color: #1e3a8a;
             color: #ffffff;
             border-radius: 3px;
-            padding: 3px 5px;
-            font-size: 9.5px;
+            padding: 2px 4px;
+            font-size: 9px;
             text-align: left;
             box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-            margin: 2px 0;
+            margin: 1px 0;
+            overflow: hidden;
         }
 
         .class-time {
@@ -312,7 +320,7 @@
             margin-top: auto;
         }
 
-        /* --- MOBILE RESPONSIVE MEDIA QUERY & OVERLAY --- */
+        /* --- MOBILE RESPONSIVE MEDIA QUERY & SCALING --- */
         @media (max-width: 900px) {
             .mobile-menu-toggle {
                 display: flex;
@@ -340,7 +348,7 @@
                 padding: 4px 10px;
             }
             .main-wrapper {
-                padding: 12px;
+                padding: 10px;
             }
             body {
                 height: auto !important;
@@ -349,6 +357,21 @@
             .page-body {
                 height: auto !important;
                 overflow: visible !important;
+            }
+            /* Scale down desktop tables slightly to fit within mobile screen bounds */
+            .courses-table {
+                font-size: 10px;
+            }
+            .courses-table th, .courses-table td {
+                padding: 6px 8px;
+            }
+            .weekly-table {
+                font-size: 9px;
+                min-width: 580px;
+            }
+            .weekly-table th, .weekly-table td {
+                padding: 2px;
+                height: 32px;
             }
         }
     </style>
@@ -399,7 +422,7 @@
                 <div class="card-header-bar">
                     <span>📅</span> Class Schedule (BSIT 4-4, Regular)
                 </div>
-                <div style="overflow-x: auto;">
+                <div class="table-wrapper">
                     <table class="courses-table">
                         <thead>
                             <tr>
@@ -415,7 +438,7 @@
                         <tbody>
                             <tr>
                                 <td>9812</td>
-                                <td>IT 411</td>
+                                <td><strong>IT 411</strong></td>
                                 <td>SYSTEMS INTEGRATION AND ARCHITECTURE</td>
                                 <td>3</td>
                                 <td>0800 - 0930 AM</td>
@@ -424,7 +447,7 @@
                             </tr>
                             <tr>
                                 <td>9815</td>
-                                <td>IT 412</td>
+                                <td><strong>IT 412</strong></td>
                                 <td>INFORMATION ASSURANCE AND SECURITY</td>
                                 <td>3</td>
                                 <td>1000 - 1130 AM</td>
@@ -433,7 +456,7 @@
                             </tr>
                             <tr>
                                 <td>9820</td>
-                                <td>IT 421A</td>
+                                <td><strong>IT 421A</strong></td>
                                 <td>CAPSTONE PROJECT AND RESEARCH 1 (LEC)</td>
                                 <td>2</td>
                                 <td>0100 - 0230 PM</td>
@@ -442,7 +465,7 @@
                             </tr>
                             <tr>
                                 <td>9821</td>
-                                <td>IT 421B</td>
+                                <td><strong>IT 421B</strong></td>
                                 <td>CAPSTONE PROJECT AND RESEARCH 1 (LAB)</td>
                                 <td>1</td>
                                 <td>0230 - 0430 PM</td>
@@ -451,7 +474,7 @@
                             </tr>
                             <tr>
                                 <td>9845</td>
-                                <td>IT ELEC 5</td>
+                                <td><strong>IT ELEC 5</strong></td>
                                 <td>ADVANCED DATABASE MANAGEMENT SYSTEMS</td>
                                 <td>3</td>
                                 <td>0900 - 1200 NN</td>
@@ -474,7 +497,7 @@
                     <table class="weekly-table" id="weeklyCalendar">
                         <thead>
                             <tr>
-                                <th style="width: 75px;"></th>
+                                <th style="width: 65px;"></th>
                                 <th data-day="Sun">Sun</th>
                                 <th data-day="Mon">Mon</th>
                                 <th data-day="Tue">Tue</th>
