@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLU Student Portal - Medical Record</title>
+    <style>
+        :root {
+            --navy-primary: #0e284f;
+            --navy-dark: #071624;
+            --light-blue: #1973c2;
+            --gold-accent: #ffcc00;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            background-image: 
+                radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, #f5f7fa, #e4e7eb);
+            background-size: 4px 4px, 100% 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        header {
+            background-color: var(--navy-primary);
+            color: #ffffff;
+            padding: 10px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--light-blue);
+            width: 100%;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        .header-brand-container {
+            height: 36px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-logo-img {
+            height: 44px;
+            object-fit: contain;
+        }
+
+        .user-profile-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #081628;
+            padding: 6px 16px;
+            border-radius: 4px;
+            border: 1px solid #1e3a8a;
+            min-width: 250px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        .user-avatar-img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            border-radius: 3px;
+        }
+
+        .user-meta {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            flex: 1;
+        }
+
+        .user-name {
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--gold-accent);
+            text-shadow: 0 0 8px rgba(255, 204, 0, 0.5);
+            letter-spacing: 0.5px;
+        }
+
+        .logout-link {
+            font-size: 11px;
+            color: #93c5fd;
+            text-decoration: none;
+            margin-top: 2px;
+        }
+
+        .logout-link:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .page-body {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        aside {
+            width: 260px;
+            background-color: var(--navy-primary);
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            border-right: 2px solid #071624;
+            flex-shrink: 0;
+        }
+
+        .term-selector-box {
+            background-color: #071624;
+            margin: 16px 14px 14px 14px;
+            padding: 10px 12px;
+            border-radius: 4px;
+            text-align: center;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .term-text {
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 0.3px;
+        }
+
+        .sidebar-menu {
+            flex: 1;
+            overflow-y: auto;
+            padding: 4px 0;
+        }
+
+        .nav-item {
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+        }
+
+        .nav-item.active {
+            border-left: 4px solid var(--gold-accent);
+            padding-left: 12px;
+        }
+
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 20px;
+            min-width: 0;
+        }
+
+        .portal-card {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .card-header-bar {
+            background-color: var(--navy-primary);
+            color: var(--gold-accent);
+            padding: 10px 14px;
+            font-weight: 300;
+            font-size: 14px;
+            text-shadow: 0 0 8px rgba(255, 204, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid var(--gold-accent);
+        }
+
+        .medical-form-container {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-section-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--navy-primary);
+            background: #f1f5f9;
+            padding: 6px 10px;
+            border-left: 4px solid var(--navy-primary);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-label {
+            font-size: 11px;
+            font-weight: bold;
+            color: #475569;
+        }
+
+        .form-input-placeholder {
+            padding: 8px 12px;
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #334155;
+        }
+
+        .update-btn {
+            background-color: var(--navy-primary);
+            color: var(--gold-accent);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            width: fit-content;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .update-btn:hover {
+            background-color: #16386d;
+        }
+
+        .medical-notice {
+            font-size: 11px;
+            color: #64748b;
+            line-height: 1.4;
+            padding: 0 4px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 14px;
+            font-size: 11px;
+            color: #64748b;
+            background: #ffffff;
+            border-top: 1px solid #cbd5e1;
+            flex-shrink: 0;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-brand-container">
+            <img src="res/header pic.png" class="header-logo-img" alt="SLU Portal">
+        </div>
+
+        <div class="user-profile-badge">
+            <img src="res/user icon.png" class="user-avatar-img" alt="User Icon">
+            <div class="user-meta">
+                <span class="user-name">Student Name</span>
+                <a href="index.html" class="logout-link">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-body">
+        <aside>
+            <div class="term-selector-box">
+                <span class="term-text">FIRST SEMESTER, 2026-2027</span>
+            </div>
+
+            <div class="sidebar-menu">
+                <a href="dashboard.html" class="nav-item">🏠 Home</a>
+                <a href="schedule.html" class="nav-item">📅 Schedule</a>
+                <a href="attendance.html" class="nav-item">📌 Attendance</a>
+                <a href="statement-of-accounts.html" class="nav-item">💳 Statement of Accounts</a>
+                <a href="grades.html" class="nav-item">📊 Grades</a>
+                <a href="evaluation-of-faculty.html" class="nav-item">📝 Evaluation of Faculty</a>
+                <a href="transcript-of-records.html" class="nav-item">📋 Transcript of Records</a>
+                <a href="curriculum-checklist.html" class="nav-item">✅ Curriculum Checklist</a>
+                <a href="medical-record.html" class="nav-item active">🏥 Medical Record</a>
+                <a href="personal-details.html" class="nav-item">👤 Personal Details</a>
+                <a href="https://samcis.slu.edu.ph/searchjournalperiodical/" target="_blank" class="nav-item">📖 Journal/Periodical</a>
+                <a href="downloadables-about-islu.html" class="nav-item">ℹ️ Downloadables / About iSLU</a>
+            </div>
+        </aside>
+
+        <div class="main-wrapper">
+            <div class="portal-card">
+                <div class="card-header-bar">
+                    <span>🏥</span> Medical Record
+                </div>
+                <div class="medical-form-container">
+                    
+                    <div class="form-section-title">Personal Information</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <span class="form-label">Last Name</span>
+                            <div class="form-input-placeholder">[LAST NAME]</div>
+                        </div>
+                        <div class="form-group">
+                            <span class="form-label">First Name</span>
+                            <div class="form-input-placeholder">[FIRST NAME]</div>
+                        </div>
+                        <div class="form-group">
+                            <span class="form-label">Date of Birth</span>
+                            <div class="form-input-placeholder">[MM / DD / YYYY]</div>
+                        </div>
+                        <div class="form-group">
+                            <span class="form-label">Gender</span>
+                            <div class="form-input-placeholder">[GENDER]</div>
+                        </div>
+                        <div class="form-group full-width">
+                            <span class="form-label">Address</span>
+                            <div class="form-input-placeholder">[RESIDENTIAL ADDRESS PLACEHOLDER]</div>
+                        </div>
+                        <div class="form-group">
+                            <span class="form-label">Contact Number</span>
+                            <div class="form-input-placeholder">[09XXXXXXXXX]</div>
+                        </div>
+                        <div class="form-group">
+                            <span class="form-label">Course / Year</span>
+                            <div class="form-input-placeholder">BSIT 4</div>
+                        </div>
+                    </div>
+
+                    <div class="form-section-title" style="margin-top: 10px;">Person to Contact in Case of Emergency</div>
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <span class="form-label">Contact Name</span>
+                            <div class="form-input-placeholder">[EMERGENCY CONTACT NAME]</div>
+                        </div>
+                        <div class="form-group full-width">
+                            <span class="form-label">Address</span>
+                            <div class="form-input-placeholder">[EMERGENCY CONTACT ADDRESS]</div>
+                        </div>
+                        <div class="form-group">
+                            <span class="form-label">Contact Number</span>
+                            <div class="form-input-placeholder">[09XXXXXXXXX]</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button class="update-btn">Update Record</button>
+                    </div>
+
+                    <div class="medical-notice">
+                        Permission is granted to the school Physician and Nurse to administer emergency care and treatment as medical needs arise. The school authorities may take the student to the nearest doctor or hospital, if needed (LIFE SAVING) before calling parents/guardians.<br>
+                        By filling this form, I agree that all of the above statements are true to the best of my ability and knowledge. I also give my consent to the SLU Medical Clinic to collect, process, and store the above information in pursuant to the provision of the Data Privacy Act.
+                    </div>
+
+                </div>
+            </div>
+
+            <footer>
+                Copyright © 2026 Saint Louis University Inc. All rights reserved.
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

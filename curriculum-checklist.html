@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLU Student Portal - Curriculum Checklist</title>
+    <style>
+        :root {
+            --navy-primary: #0e284f;
+            --navy-dark: #071624;
+            --light-blue: #1973c2;
+            --gold-accent: #ffcc00;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            background-image: 
+                radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, #f5f7fa, #e4e7eb);
+            background-size: 4px 4px, 100% 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        header {
+            background-color: var(--navy-primary);
+            color: #ffffff;
+            padding: 10px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--light-blue);
+            width: 100%;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        .header-brand-container {
+            height: 36px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-logo-img {
+            height: 44px;
+            object-fit: contain;
+        }
+
+        .user-profile-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #081628;
+            padding: 6px 16px;
+            border-radius: 4px;
+            border: 1px solid #1e3a8a;
+            min-width: 250px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        .user-avatar-img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            border-radius: 3px;
+        }
+
+        .user-meta {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            flex: 1;
+        }
+
+        .user-name {
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--gold-accent);
+            text-shadow: 0 0 8px rgba(255, 204, 0, 0.5);
+            letter-spacing: 0.5px;
+        }
+
+        .logout-link {
+            font-size: 11px;
+            color: #93c5fd;
+            text-decoration: none;
+            margin-top: 2px;
+        }
+
+        .logout-link:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .page-body {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        aside {
+            width: 260px;
+            background-color: var(--navy-primary);
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            border-right: 2px solid #071624;
+            flex-shrink: 0;
+        }
+
+        .term-selector-box {
+            background-color: #071624;
+            margin: 16px 14px 14px 14px;
+            padding: 10px 12px;
+            border-radius: 4px;
+            text-align: center;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .term-text {
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 0.3px;
+        }
+
+        .sidebar-menu {
+            flex: 1;
+            overflow-y: auto;
+            padding: 4px 0;
+        }
+
+        .nav-item {
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+        }
+
+        .nav-item.active {
+            border-left: 4px solid var(--gold-accent);
+            padding-left: 12px;
+        }
+
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 20px;
+            min-width: 0;
+        }
+
+        .notice-banner {
+            background-color: #fef3c7;
+            border-left: 4px solid #d97706;
+            color: #92400e;
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-size: 11.5px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .portal-card {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .card-header-bar {
+            background-color: var(--navy-primary);
+            color: var(--gold-accent);
+            padding: 10px 14px;
+            font-weight: 300;
+            font-size: 14px;
+            text-shadow: 0 0 8px rgba(255, 204, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid var(--gold-accent);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        .checklist-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11.5px;
+            min-width: 800px;
+        }
+
+        .checklist-table th {
+            background-color: #f8fafc;
+            color: #1e293b;
+            text-align: left;
+            padding: 10px 14px;
+            border-bottom: 1px solid #cbd5e1;
+            font-weight: bold;
+        }
+
+        .checklist-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #1e293b;
+            vertical-align: middle;
+        }
+
+        .semester-header-row {
+            background-color: #f1f5f9;
+            font-weight: bold;
+            color: var(--navy-primary);
+            font-size: 12px;
+            padding: 8px 14px;
+            border-top: 1px solid #cbd5e1;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .text-center { text-align: center; }
+        .check-icon {
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 14px;
+            font-size: 11px;
+            color: #64748b;
+            background: #ffffff;
+            border-top: 1px solid #cbd5e1;
+            flex-shrink: 0;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-brand-container">
+            <img src="res/header pic.png" class="header-logo-img" alt="SLU Portal">
+        </div>
+
+        <div class="user-profile-badge">
+            <img src="res/user icon.png" class="user-avatar-img" alt="User Icon">
+            <div class="user-meta">
+                <span class="user-name">Student Name</span>
+                <a href="index.html" class="logout-link">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-body">
+        <aside>
+            <div class="term-selector-box">
+                <span class="term-text">FIRST SEMESTER, 2026-2027</span>
+            </div>
+
+            <div class="sidebar-menu">
+                <a href="dashboard.html" class="nav-item">🏠 Home</a>
+                <a href="schedule.html" class="nav-item">📅 Schedule</a>
+                <a href="attendance.html" class="nav-item">📌 Attendance</a>
+                <a href="statement-of-accounts.html" class="nav-item">💳 Statement of Accounts</a>
+                <a href="grades.html" class="nav-item">📊 Grades</a>
+                <a href="evaluation-of-faculty.html" class="nav-item">📝 Evaluation of Faculty</a>
+                <a href="transcript-of-records.html" class="nav-item">📋 Transcript of Records</a>
+                <a href="curriculum-checklist.html" class="nav-item active">✅ Curriculum Checklist</a>
+                <a href="medical-record.html" class="nav-item">🏥 Medical Record</a>
+                <a href="personal-details.html" class="nav-item">👤 Personal Details</a>
+                <a href="https://samcis.slu.edu.ph/searchjournalperiodical/" target="_blank" class="nav-item">📖 Journal/Periodical</a>
+                <a href="downloadables-about-islu.html" class="nav-item">ℹ️ Downloadables / About iSLU</a>
+            </div>
+        </aside>
+
+        <div class="main-wrapper">
+            
+            <div class="notice-banner">
+                <span>ℹ️</span>
+                <div><strong>NOTE:</strong> For inquiries regarding your checklist please proceed to your respective Dean's offices.</div>
+            </div>
+
+            <div class="portal-card">
+                <div class="card-header-bar">
+                    <span>✅</span> BACHELOR OF SCIENCE IN INFORMATION TECHNOLOGY FIRST SEMESTER, 2018-2019
+                </div>
+                <div class="table-wrapper">
+                    <table class="checklist-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 8%;" class="text-center">Status</th>
+                                <th style="width: 22%;">Course Number</th>
+                                <th style="width: 60%;">Course Description</th>
+                                <th style="width: 10%;" class="text-center">Units</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- First Year, First Semester -->
+                            <tr><td colspan="4" class="semester-header-row">First Year, First Semester</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>CFE 101</td><td>GOD'S JOURNEY WITH HIS PEOPLE</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>FIT HW</td><td>PHYSICAL ACTIVITY TOWARDS HEALTH AND FITNESS (HEALTH AND WELLNESS)</td><td class="text-center">2</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>GART</td><td>ART APPRECIATION</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>GHIST</td><td>READINGS IN PHILIPPINE HISTORY</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>GSELF</td><td>UNDERSTANDING THE SELF</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 111</td><td>INTRODUCTION TO COMPUTING (LEC)</td><td class="text-center">2</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 111L</td><td>INTRODUCTION TO COMPUTING (LAB)</td><td class="text-center">1</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 112</td><td>COMPUTER PROGRAMMING 1 (LEC)</td><td class="text-center">2</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 112L</td><td>COMPUTER PROGRAMMING 1 (LAB)</td><td class="text-center">1</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 113</td><td>DISCRETE MATHEMATICS</td><td class="text-center">3</td></tr>
+
+                            <!-- First Year, Second Semester -->
+                            <tr><td colspan="4" class="semester-header-row">First Year, Second Semester</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>CFE 102</td><td>CHRISTIAN MORALITY IN OUR TIMES</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>FIT CS</td><td>PHYSICAL ACTIVITY TOWARDS HEALTH AND FITNESS (COMBATIVE SPORTS)</td><td class="text-center">2</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>GCWORLD</td><td>THE CONTEMPORARY WORLD</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>GMATH</td><td>MATHEMATICS IN THE MODERN WORLD</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>GPCOM</td><td>PURPOSIVE COMMUNICATION</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 121</td><td>INFORMATION SYSTEM FUNDAMENTALS</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 122</td><td>COMPUTER PROGRAMMING 2</td><td class="text-center">2</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 122L</td><td>COMPUTER PROGRAMMING 2 (LAB)</td><td class="text-center">1</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 123</td><td>PLATFORM TECHNOLOGIES</td><td class="text-center">2</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 123L</td><td>PLATFORM TECHNOLOGIES (LAB)</td><td class="text-center">1</td></tr>
+
+                            <!-- First Year, Short Term -->
+                            <tr><td colspan="4" class="semester-header-row">First Year, Short Term</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>GRIZAL</td><td>THE LIFE AND WORKS OF RIZAL</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 131</td><td>COMPUTER ARCHITECTURE</td><td class="text-center">2</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 131L</td><td>COMPUTER ARCHITECTURE (LAB)</td><td class="text-center">1</td></tr>
+
+                            <!-- Second Year, First Semester -->
+                            <tr><td colspan="4" class="semester-header-row">Second Year, First Semester</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>CFE 103</td><td>CATHOLIC FOUNDATION OF MISSION</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>FIT OA</td><td>PHYSICAL ACTIVITY TOWARDS HEALTH AND FITNESS (OUTDOOR AND ADVENTURE ACTIVITIES)</td><td class="text-center">2</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>GENVI</td><td>ENVIRONMENTAL SCIENCE</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>GSTS</td><td>SCIENCE, TECHNOLOGY, AND SOCIETY</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 211</td><td>REQUIREMENTS ANALYSIS AND MODELING</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 212</td><td>DATA STRUCTURES (LEC)</td><td class="text-center">2</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 212L</td><td>DATA STRUCTURES (LAB)</td><td class="text-center">1</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 213</td><td>NETWORK FUNDAMENTALS (LEC)</td><td class="text-center">2</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 213L</td><td>NETWORK FUNDAMENTALS (LAB)</td><td class="text-center">1</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>NSTP-CWTS 1</td><td>FOUNDATIONS OF SERVICE</td><td class="text-center">3</td></tr>
+
+                            <!-- Second Year, Second Semester -->
+                            <tr><td colspan="4" class="semester-header-row">Second Year, Second Semester</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>CFE 104</td><td>CICM MISSIONARY IDENTITY</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>FIT AQ</td><td>PHYSICAL ACTIVITY TOWARDS HEALTH AND FITNESS (AQUATICS)</td><td class="text-center">2</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>GENTREP</td><td>THE ENTREPRENEURIAL MIND</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>GRVA</td><td>READING VISUAL ART</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 221</td><td>INFORMATION MANAGEMENT (LEC)</td><td class="text-center">2</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 221L</td><td>INFORMATION MANAGEMENT (LAB)</td><td class="text-center">1</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 222</td><td>INTEGRATIVE TECHNOLOGIES (LEC)</td><td class="text-center">2</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 222L</td><td>INTEGRATIVE TECHNOLOGIES (LAB)</td><td class="text-center">1</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 223</td><td>HUMAN COMPUTER INTERACTION</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>NSTP-CWTS 2</td><td>SOCIAL AWARENESS AND EMPOWERMENT FOR SERVICE</td><td class="text-center">3</td></tr>
+
+                            <!-- Second Year, Short Term -->
+                            <tr><td colspan="4" class="semester-header-row">Second Year, Short Term</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>CS 314</td><td>SOCIAL AND PERSONAL DEVELOPMENT IN THE ICT WORKPLACE</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>CS 315</td><td>TECHNOLOGY-ASSISTED PRESENTATION AND COMMUNICATION</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>GETHICS</td><td>ETHICS</td><td class="text-center">3</td></tr>
+
+                            <!-- Third Year, First Semester -->
+                            <tr><td colspan="4" class="semester-header-row">Third Year, First Semester</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>CFE 105A</td><td>CICM IN ACTION: JUSTICE, PEACE, INTEGRITY OF CREATION, INDIGENOUS PEOPLES & INTERRELIGIOUS DIALOGUE</td><td class="text-center">1.5</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 311</td><td>APPLICATIONS DEVELOPMENT (LEC)</td><td class="text-center">2</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 311L</td><td>APPLICATIONS DEVELOPMENT (LAB)</td><td class="text-center">1</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 312</td><td>WEB TECHNOLOGIES (LEC)</td><td class="text-center">2</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 312L</td><td>WEB TECHNOLOGIES (LAB)</td><td class="text-center">1</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 313</td><td>SOFTWARE ENGINEERING</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 314</td><td>SOCIAL AND PROFESSIONAL ISSUES IN INFORMATION TECHNOLOGY</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 315</td><td>TECHNOPRENEURSHIP</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>ITE 15</td><td>IT SECURITY MANAGEMENT (Elective)</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"></td><td>ITE 23</td><td>ELECTRONIC COMMERCE (Elective)</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"></td><td>ITE 30</td><td>INFORMATION TECHNOLOGY CERTIFICATION REVIEW (Elective)</td><td class="text-center">3</td></tr>
+
+                            <!-- Third Year, Second Semester -->
+                            <tr><td colspan="4" class="semester-header-row">Third Year, Second Semester</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>CFE 105B</td><td>CICM IN ACTION: ENVIRONMENTAL PLANNING & MANAGEMENT, AND DISASTER RISK REDUCTION MANAGEMENT</td><td class="text-center">1.5</td></tr>
+                            <tr><td class="text-center"></td><td>IT 321</td><td>IT PROJECT 1</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"></td><td>IT 322</td><td>DATA ANALYTICS (LEC)</td><td class="text-center">2</td></tr>
+                            <tr><td class="text-center"></td><td>IT 322L</td><td>DATA ANALYTICS (LAB)</td><td class="text-center">1</td></tr>
+                            <tr><td class="text-center"></td><td>IT 323</td><td>SYSTEM ADMINISTRATION AND MAINTENANCE (LEC)</td><td class="text-center">2</td></tr>
+                            <tr><td class="text-center"></td><td>IT 323L</td><td>SYSTEM ADMINISTRATION AND MAINTENANCE (LAB)</td><td class="text-center">1</td></tr>
+                            <tr><td class="text-center"></td><td>IT 324</td><td>SYSTEM INTEGRATION AND ARCHITECTURE</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"></td><td>IT 325</td><td>FIELD TRIPS AND SEMINARS</td><td class="text-center"></td></tr>
+                            <tr><td class="text-center"></td><td>ITE 26</td><td>CURRENT TRENDS 1 (Elective)</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"></td><td>ITE 27</td><td>CURRENT TRENDS 2 (Elective)</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"></td><td>ITE 29</td><td>SPECIAL TOPICS 2 (Elective)</td><td class="text-center">3</td></tr>
+
+                            <!-- Third Year, Short Term -->
+                            <tr><td colspan="4" class="semester-header-row">Third Year, Short Term</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>IT 331</td><td>INFORMATION ASSURANCE AND SECURITY</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>ITE 17</td><td>DATA MINING (LEC)</td><td class="text-center">2</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>ITE 17L</td><td>DATA MINING (LAB)</td><td class="text-center">1</td></tr>
+
+                            <!-- Fourth Year, First Semester -->
+                            <tr><td colspan="4" class="semester-header-row">Fourth Year, First Semester</td></tr>
+                            <tr><td class="text-center"></td><td>CFE 106A</td><td>EMBRACING THE CICM MISSION</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"></td><td>FOR LANG 1</td><td>FOREIGN LANGUAGE 1</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"></td><td>IT 411</td><td>IT PROJECT 2</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"></td><td>IT 412</td><td>IT RESOURCE MANAGEMENT</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"></td><td>ITE 14</td><td>UX CONCEPTS AND DESIGN (Elective)</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"><span class="check-icon">✔</span></td><td>ITE 28</td><td>SPECIAL TOPICS 1 (Elective)</td><td class="text-center">3</td></tr>
+
+                            <!-- Fourth Year, Second Semester -->
+                            <tr><td colspan="4" class="semester-header-row">Fourth Year, Second Semester</td></tr>
+                            <tr><td class="text-center"></td><td>CFE 106B</td><td>EMBRACING THE CICM MISSION</td><td class="text-center">3</td></tr>
+                            <tr><td class="text-center"></td><td>IT 421</td><td>PRACTICUM</td><td class="text-center">6</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <footer>
+                Copyright © 2026 Saint Louis University Inc. All rights reserved.
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
