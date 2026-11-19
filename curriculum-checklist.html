@@ -19,6 +19,10 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: #f0f2f5;
             background-image: 
@@ -189,6 +193,7 @@
             display: flex;
             flex-direction: column;
             overflow-y: auto;
+            scroll-behavior: smooth;
             padding: 20px;
             min-width: 0;
         }
@@ -273,6 +278,40 @@
             font-weight: bold;
         }
 
+        /* --- FLOATING BACK TO TOP BUTTON --- */
+        .back-to-top-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: var(--navy-primary);
+            color: var(--gold-accent);
+            border: 2px solid var(--gold-accent);
+            border-radius: 30px;
+            padding: 10px 16px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 90;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease, background-color 0.2s;
+        }
+
+        .back-to-top-btn.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top-btn:hover {
+            background-color: var(--navy-dark);
+        }
+
         footer {
             text-align: center;
             padding: 14px;
@@ -305,9 +344,9 @@
                 display: block;
             }
             header {
-                padding: 8px 14px;
+                padding: 8px 12px;
             }
-             .user-profile-badge {
+            .user-profile-badge {
                 min-width: unset;
                 max-width: 155px;
                 padding: 4px 8px;
@@ -325,6 +364,7 @@
             }
             .main-wrapper {
                 padding: 10px;
+                overflow-y: visible;
             }
             body {
                 height: auto !important;
@@ -339,6 +379,12 @@
             }
             .checklist-table th, .checklist-table td {
                 padding: 8px 6px;
+            }
+            .back-to-top-btn {
+                bottom: 16px;
+                right: 16px;
+                padding: 8px 14px;
+                font-size: 11px;
             }
         }
     </style>
@@ -356,7 +402,7 @@
         <div class="user-profile-badge">
             <img src="res/user icon.png" class="user-avatar-img" alt="User Icon">
             <div class="user-meta">
-                <span class="user-name">Diwata Pares</span>
+                <span class="user-name">Student Name</span>
                 <a href="index.html" class="logout-link">Logout</a>
             </div>
         </div>
@@ -384,7 +430,7 @@
             </div>
         </aside>
 
-        <div class="main-wrapper">
+        <div class="main-wrapper" id="mainWrapper">
             
             <div class="notice-banner">
                 <span>ℹ️</span>
@@ -527,6 +573,12 @@
             </footer>
         </div>
     </div>
+
+    <!-- Floating Back to Top Button -->
+    <button type="button" class="back-to-top-btn" id="backToTopBtn" aria-label="Back to top">
+        &#8593; Back to Top
+    </button>
+
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <script>
@@ -546,6 +598,31 @@
                 });
             }
         }
+
+        // Back to Top Button Logic (supports both desktop .main-wrapper scroll and mobile window scroll)
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        const mainWrapper = document.getElementById('mainWrapper');
+
+        function toggleBackToTop() {
+            const scrollPos = Math.max(window.scrollY || 0, mainWrapper ? mainWrapper.scrollTop : 0);
+            if (scrollPos > 200) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        }
+
+        window.addEventListener('scroll', toggleBackToTop);
+        if (mainWrapper) {
+            mainWrapper.addEventListener('scroll', toggleBackToTop);
+        }
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (mainWrapper) {
+                mainWrapper.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
     </script>
 </body>
 </html>
